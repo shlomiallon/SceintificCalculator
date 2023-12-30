@@ -5,16 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SceintificCalculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="450" Width="500">
+        Title="Calculator" Height="500" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="InputTextBox" Text="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" IsReadOnly="True" TextAlignment="Right"/>
 
-        <!-- Grid for the lower half -->
+        
+        <!-- Upper half: two rows of buttons -->
         <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                <!-- Add buttons for the first row in the upper half -->
+                <Button Content="Sin" Click="SinButton_Click" Width="50"/>
+                <Button Content="Cos" Click="CosButton_Click" Width="50"/>
+                <Button Content="tan" Click="TanButton_Click" Width="50"/>
+                <Button Content="cot" Click="CotButton_Click" Width="50"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0">
+                <!-- Add buttons for the second row in the upper half -->
+                <Button Content="π" Click="PiButton_Click" Width="50"/>
+                <Button Content="sinh" Click="SinhButton_Click" Width="50"/>
+                <Button Content="cosh" Click="CoshButton_Click" Width="50"/>
+                <Button Content="tanh" Click="TanhButton_Click" Width="50"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Lower half: previous layout with UniformGrid for buttons -->
+        <Grid Grid.Row="2" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -23,6 +47,14 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
+
+            <!-- Row 0 buttons -->
+            <UniformGrid Grid.Row="0" Columns="4">
+                <Button Content="C" Click="ClearButton_Click"/>
+                <Button Content="CE" Click="ClearEntryButton_Click"/>
+                <Button Content="⌫" Click="BackButton_Click"/>
+                <Button Content="√" Click="SquareRootButton_Click"/>
+            </UniformGrid>
             <!-- Row 1 buttons -->
             <UniformGrid Grid.Row="1" Columns="4">
                 <Button Content="7" Click="NumberButton_Click"/>
@@ -55,13 +87,8 @@
                 <Button Content="+" Click="OperatorButton_Click"/>
             </UniformGrid>
 
-            <!-- Row 5 buttons -->
-            <UniformGrid Grid.Row="0" Columns="4">
-                <Button Content="C" Click="ClearButton_Click"/>
-                <Button Content="CE" Click="ClearEntryButton_Click"/>
-                <Button Content="⌫" Click="BackButton_Click"/>
-                <Button Content="√" Click="SquareRootButton_Click"/>
-            </UniformGrid>
+            
+
         </Grid>
     </Grid>
 </Window>

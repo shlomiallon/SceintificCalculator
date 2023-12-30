@@ -172,5 +172,109 @@ namespace SceintificCalculator
             }
         }
 
+        private void SinButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double degrees = double.Parse(currentInput);
+                double radians = degrees * (Math.PI / 180); // Convert degrees to radians
+
+                double result = Math.Sin(radians);
+                currentInput = result.ToString();
+                UpdateInputDisplay(); 
+            }
+        }
+
+        private void CosButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double degrees = double.Parse(currentInput);
+                double radians = degrees * (Math.PI / 180); // Convert degrees to radians
+
+                double result = Math.Cos(radians);
+                currentInput = result.ToString();
+                UpdateInputDisplay(); // Update the UI with the cosine result
+            }
+        }
+
+        private void TanButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double degrees = double.Parse(currentInput);
+                double radians = degrees * (Math.PI / 180); // Convert degrees to radians
+
+                double result = Math.Tan(radians);
+                currentInput = result.ToString();
+                UpdateInputDisplay(); // Update the UI with the tangent result
+            }
+        }
+
+        private void CotButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double degrees = double.Parse(currentInput);
+                double radians = degrees * (Math.PI / 180); // Convert degrees to radians
+
+                double tanValue = Math.Tan(radians);
+
+                if (tanValue != 0) // Ensure cotangent isn't calculated for tangent = 0
+                {
+                    double result = 1 / tanValue; // Calculate cotangent as reciprocal of tangent
+                    currentInput = result.ToString();
+                    UpdateInputDisplay(); // Update the UI with the cotangent result
+                }
+                else
+                {
+                    MessageBox.Show("Invalid input for cotangent"); // Show error message for tangent = 0
+                }
+            }
+        }
+
+        private void PiButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentInput = Math.PI.ToString();
+            UpdateInputDisplay(); // Update the UI with the value of pi
+        }
+
+        private void SinhButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double value = double.Parse(currentInput);
+
+                double result = Math.Sinh(value);
+                currentInput = result.ToString();
+                UpdateInputDisplay(); // Update the UI with the hyperbolic sine result
+            }
+        }
+
+        private void CoshButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double value = double.Parse(currentInput);
+
+                double result = Math.Cosh(value);
+                currentInput = result.ToString();
+                UpdateInputDisplay(); // Update the UI with the hyperbolic cosine result
+            }
+        }
+
+
+        private void TanhButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentInput))
+            {
+                double value = double.Parse(currentInput);
+
+                double result = Math.Tanh(value);
+                currentInput = result.ToString();
+                UpdateInputDisplay(); // Update the UI with the hyperbolic tangent result
+            }
+        }
+
     }
 }
