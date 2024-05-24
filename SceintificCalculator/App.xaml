@@ -4,6 +4,19 @@
              xmlns:local="clr-namespace:SceintificCalculator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <SolidColorBrush x:Key="NumbersColor" Color="#333333"/>
+        <SolidColorBrush x:Key="OperatorColor" Color="Orange"/>
+        <SolidColorBrush x:Key="KeyForeground" Color="White"/>
+
+        <Style x:Key="DarkGrayButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource NumbersColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource KeyForeground}"/>
+        </Style>
+        <Style TargetType="Button">
+
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
     </Application.Resources>
 </Application>

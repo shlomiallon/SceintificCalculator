@@ -6,17 +6,14 @@
         xmlns:local="clr-namespace:SceintificCalculator"
         mc:Ignorable="d"
         Title="Calculator" Height="500" Width="500">
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto" MinHeight="120"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="InputTextBox" Text="0" VerticalAlignment="Top" Margin="10,10,10,0" IsReadOnly="True" TextAlignment="Right" Height="18"/>
-
+        <Label x:Name="InputTextBox" Content="0" HorizontalAlignment="Right" VerticalAlignment="top" FontSize="50" />
         <ComboBox x:Name="ModeComboBox" SelectionChanged="ModeComboBox_SelectionChanged" Margin="338,10,10,85" Grid.Row="1">
             <ComboBoxItem Content="Standard"/>
             <ComboBoxItem Content="Trigonometry"/>
@@ -30,16 +27,16 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5" Visibility="{Binding TrigonometryVisibility, Converter={StaticResource BoolToVis}}">
-                <Button Content="Sin" Click="SinButton_Click" Width="50"/>
-                <Button Content="Cos" Click="CosButton_Click" Width="50"/>
-                <Button Content="tan" Click="TanButton_Click" Width="50"/>
-                <Button Content="cot" Click="CotButton_Click" Width="50"/>
+                <Button Content="Sin" Click="SinButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="Cos" Click="CosButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="tan" Click="TanButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="cot" Click="CotButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding TrigonometryVisibility, Converter={StaticResource BoolToVis}}">
-                <Button Content="π" Click="PiButton_Click" Width="50"/>
-                <Button Content="sinh" Click="SinhButton_Click" Width="50"/>
-                <Button Content="cosh" Click="CoshButton_Click" Width="50"/>
-                <Button Content="tanh" Click="TanhButton_Click" Width="50"/>
+                <Button Content="π" Click="PiButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="sinh" Click="SinhButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="cosh" Click="CoshButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="tanh" Click="TanhButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Margin="10">
@@ -47,9 +44,9 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5" Visibility="{Binding LogarithmicVisibility, Converter={StaticResource BoolToVis}}">
-                <Button Content="Log" Click="LogButton_Click" Width="50"/>
-                <Button Content="Ln" Click="LnButton_Click" Width="50"/>
-                <Button Content="e" Click="EButton_Click" Width="50"/>
+                <Button Content="Log" Click="LogButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="Ln" Click="LnButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
+                <Button Content="e" Click="EButton_Click" Width="50" Style="{StaticResource DarkGrayButtonStyle}"/>
             </StackPanel>
         </Grid>
 
@@ -71,35 +68,57 @@
                 <Button Content="√" Click="SquareRootButton_Click"/>
             </UniformGrid>
             <!-- Row 1 buttons -->
-            <UniformGrid Grid.Row="1" Columns="4">
-                <Button Content="7" Click="NumberButton_Click"/>
-                <Button Content="8" Click="NumberButton_Click"/>
-                <Button Content="9" Click="NumberButton_Click"/>
-                <Button Content="/" Click="OperatorButton_Click"/>
+            <UniformGrid Grid.Row="1" Columns="4" >
+                <Button Content="7" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"/>
+                <Button Content="8" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"/>
+                <Button Content="9" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"/>
+                <Button Content="/" Click="OperatorButton_Click"
+                        Background="{StaticResource OperatorColor}"/>
             </UniformGrid>
 
             <!-- Row 2 buttons -->
             <UniformGrid Grid.Row="2" Columns="4">
-                <Button Content="4" Click="NumberButton_Click"/>
-                <Button Content="5" Click="NumberButton_Click"/>
-                <Button Content="6" Click="NumberButton_Click"/>
-                <Button Content="*" Click="OperatorButton_Click"/>
+                <Button Content="4" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"/>
+                <Button Content="5" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"/>
+                <Button Content="6" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"/>
+                <Button Content="*" Click="OperatorButton_Click"
+                        Background="{StaticResource OperatorColor}"/>
             </UniformGrid>
 
             <!-- Row 3 buttons -->
             <UniformGrid Grid.Row="3" Columns="4">
-                <Button Content="1" Click="NumberButton_Click"/>
-                <Button Content="2" Click="NumberButton_Click"/>
-                <Button Content="3" Click="NumberButton_Click"/>
-                <Button Content="-" Click="OperatorButton_Click"/>
+                <Button Content="1" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"
+                        />
+                <Button Content="2" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"
+                        />
+                <Button Content="3" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"
+                        />
+                <Button Content="-" Click="OperatorButton_Click"
+                         Background="{StaticResource OperatorColor}"/>
             </UniformGrid>
 
             <!-- Row 4 buttons -->
             <UniformGrid Grid.Row="4" Columns="4">
-                <Button Content="0" Click="NumberButton_Click"/>
-                <Button Content="." Click="DecimalButton_Click"/>
-                <Button Content="=" Click="EqualsButton_Click"/>
-                <Button Content="+" Click="OperatorButton_Click"/>
+                <Button Content="0" Click="NumberButton_Click"
+                        Background="{StaticResource NumbersColor}"
+                        />
+                <Button Content="." Click="DecimalButton_Click"
+                        Background="{StaticResource NumbersColor}"
+                        />
+                <Button Content="=" Click="EqualsButton_Click"
+                        Background="{StaticResource NumbersColor}"
+                        />
+                <Button Content="+" Click="OperatorButton_Click"
+                        Background="{StaticResource OperatorColor}"/>
             </UniformGrid>
         </Grid>
     </Grid>

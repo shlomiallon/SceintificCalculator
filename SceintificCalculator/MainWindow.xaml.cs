@@ -139,7 +139,7 @@ namespace SceintificCalculator
 
         private void UpdateInputDisplay()
         {
-            InputTextBox.Text = currentInput; // Assuming InputTextBox is the TextBox control in the UI
+            InputTextBox.Content = currentInput; // Assuming InputTextBox is the TextBox control in the UI
         }
 
 
