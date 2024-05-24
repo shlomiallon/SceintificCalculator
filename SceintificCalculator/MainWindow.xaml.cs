@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +22,56 @@ namespace SceintificCalculator
     /// </summary>
     /// 
 
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
         private string currentInput = "";
         private char currentOperator = ' ';
         private double currentResult = 0;
+        private bool _isTrigonometryVisible;
+        private bool _isLogarithmicVisible;
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            TrigonometryVisibility = false;
+            LogarithmicVisibility = false;
         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public bool TrigonometryVisibility
+        {
+            get { return _isTrigonometryVisible; }
+            set
+            {
+                _isTrigonometryVisible = value;
+                OnPropertyChanged("TrigonometryVisibility");
+            }
+        }
+        public bool LogarithmicVisibility
+        {
+            get { return _isLogarithmicVisible; }
+            set
+            {
+                _isLogarithmicVisible = value;
+                OnPropertyChanged("LogarithmicVisibility");
+            }
+        }
+
+        private void ModeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ModeComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                TrigonometryVisibility = selectedItem.Content.ToString() == "Trigonometry";
+                LogarithmicVisibility = selectedItem.Content.ToString() == "Logarithmic";
+            }
+        }
+
 
         private void NumberButton_Click(object sender, RoutedEventArgs e)
         {
@@ -241,40 +283,44 @@ namespace SceintificCalculator
 
         private void SinhButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(currentInput))
-            {
-                double value = double.Parse(currentInput);
-
-                double result = Math.Sinh(value);
-                currentInput = result.ToString();
-                UpdateInputDisplay(); // Update the UI with the hyperbolic sine result
-            }
+            PerformOperation(value => Math.Sinh(value));
         }
 
         private void CoshButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(currentInput))
-            {
-                double value = double.Parse(currentInput);
-
-                double result = Math.Cosh(value);
-                currentInput = result.ToString();
-                UpdateInputDisplay(); // Update the UI with the hyperbolic cosine result
-            }
+            PerformOperation(value => Math.Cosh(value));
         }
 
-
         private void TanhButton_Click(object sender, RoutedEventArgs e)
+        {
+            PerformOperation(value => Math.Tanh(value));
+        }
+        private void LogButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            PerformOperation(value => Math.Log10(value));
+        }
+
+        private void LnButton_Click(object sender, RoutedEventArgs e)
+        {
+            PerformOperation(value => Math.Log(value));
+        }
+
+        private void EButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentInput = Math.E.ToString();
+            UpdateInputDisplay();
+        }
+        private void PerformOperation(Func<double, double> Function)
         {
             if (!string.IsNullOrEmpty(currentInput))
             {
                 double value = double.Parse(currentInput);
-
-                double result = Math.Tanh(value);
+                double result = Function(value);
                 currentInput = result.ToString();
-                UpdateInputDisplay(); // Update the UI with the hyperbolic tangent result
+                UpdateInputDisplay(); // Update the UI with the result
             }
         }
-
     }
+
 }

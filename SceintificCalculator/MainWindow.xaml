@@ -6,39 +6,55 @@
         xmlns:local="clr-namespace:SceintificCalculator"
         mc:Ignorable="d"
         Title="Calculator" Height="500" Width="500">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto" MinHeight="120"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="InputTextBox" Text="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" IsReadOnly="True" TextAlignment="Right"/>
+        <TextBox x:Name="InputTextBox" Text="0" VerticalAlignment="Top" Margin="10,10,10,0" IsReadOnly="True" TextAlignment="Right" Height="18"/>
 
-        
+        <ComboBox x:Name="ModeComboBox" SelectionChanged="ModeComboBox_SelectionChanged" Margin="338,10,10,85" Grid.Row="1">
+            <ComboBoxItem Content="Standard"/>
+            <ComboBoxItem Content="Trigonometry"/>
+            <ComboBoxItem Content="Logarithmic"/>
+        </ComboBox>
+
         <!-- Upper half: two rows of buttons -->
-        <Grid Grid.Row="1" Margin="10">
+        <Grid Grid.Row="1" Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
-                
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5" Visibility="{Binding TrigonometryVisibility, Converter={StaticResource BoolToVis}}">
                 <Button Content="Sin" Click="SinButton_Click" Width="50"/>
                 <Button Content="Cos" Click="CosButton_Click" Width="50"/>
                 <Button Content="tan" Click="TanButton_Click" Width="50"/>
                 <Button Content="cot" Click="CotButton_Click" Width="50"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0">
-                
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding TrigonometryVisibility, Converter={StaticResource BoolToVis}}">
                 <Button Content="π" Click="PiButton_Click" Width="50"/>
                 <Button Content="sinh" Click="SinhButton_Click" Width="50"/>
                 <Button Content="cosh" Click="CoshButton_Click" Width="50"/>
                 <Button Content="tanh" Click="TanhButton_Click" Width="50"/>
             </StackPanel>
         </Grid>
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5" Visibility="{Binding LogarithmicVisibility, Converter={StaticResource BoolToVis}}">
+                <Button Content="Log" Click="LogButton_Click" Width="50"/>
+                <Button Content="Ln" Click="LnButton_Click" Width="50"/>
+                <Button Content="e" Click="EButton_Click" Width="50"/>
+            </StackPanel>
+        </Grid>
 
         <!-- Lower half: with UniformGrid for buttons -->
-        <Grid Grid.Row="2" Margin="10">
+        <Grid Grid.Row="2" Margin="10,10,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -46,7 +62,6 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-
 
             <!-- Row 0 buttons -->
             <UniformGrid Grid.Row="0" Columns="4">
@@ -86,9 +101,6 @@
                 <Button Content="=" Click="EqualsButton_Click"/>
                 <Button Content="+" Click="OperatorButton_Click"/>
             </UniformGrid>
-
-            
-
         </Grid>
     </Grid>
 </Window>
